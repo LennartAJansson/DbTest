@@ -4,9 +4,9 @@ internal class Person
   : EntityBase
 {
   public int Id { get; set; } //Primary key property
-  public string Name { get; set; }
-  public string Street { get; set; }
-  public string City { get; set; }
+  public required string Name { get; set; }
+  public required string Street { get; set; }
+  public required string City { get; set; }
 
   // Navigation property
   public ICollection<Order> Orders { get; set; } = new HashSet<Order>();

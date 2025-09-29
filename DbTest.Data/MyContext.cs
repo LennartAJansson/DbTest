@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 internal class MyContext(DbContextOptions options)
   : DbContext(options)
 {
-  public DbSet<Person> People { get; set; }
-  public DbSet<Order> Orders { get; set; }
+  public DbSet<Person> People => Set<Person>();
+  public DbSet<Order> Orders => Set<Order>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyContext).Assembly);
+    _ = modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyContext).Assembly);
   }
 }

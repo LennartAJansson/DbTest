@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-internal class MyContextFactory 
+internal class MyContextFactory
   : IDesignTimeDbContextFactory<MyContext>
 {
   public MyContext CreateDbContext(string[] args)
@@ -12,9 +12,11 @@ internal class MyContextFactory
     IConfiguration configuration = new ConfigurationBuilder()
       .AddUserSecrets(typeof(MyContextFactory).Assembly)
       .Build();
-    var cStr = configuration.GetConnectionString("DefaultConnection");
-    var optionsBuilder = new DbContextOptionsBuilder<MyContext>();
-    optionsBuilder.UseSqlServer(cStr);
+
+    string? cStr = configuration.GetConnectionString("DefaultConnection");
+    DbContextOptionsBuilder<MyContext> optionsBuilder = new();
+    _ = optionsBuilder.UseSqlServer(cStr);
+
     return new MyContext(optionsBuilder.Options);
   }
 }

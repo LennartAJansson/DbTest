@@ -17,7 +17,6 @@ public static class DataExtensions
       options.AddInterceptors(sp.GetRequiredService<MyInterceptor>());
     });
 
-
     return services;
   }
 
