@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="DbTest.Data/DbTest.Data.csproj" Id="f0a6ab0d-74f6-4468-b32a-ee7183916051" />
+  <Project Path="DbTest/DbTest.csproj" />
+</Solution>
