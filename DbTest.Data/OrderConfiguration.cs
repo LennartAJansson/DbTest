@@ -1,4 +1,4 @@
-﻿namespace DbTest;
+﻿namespace DbTest.Data;
 
 using Microsoft.EntityFrameworkCore;
 

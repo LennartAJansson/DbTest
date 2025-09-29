@@ -11,10 +11,10 @@ public static class DataExtensions
   {
     services.AddSingleton<MyInterceptor>();
     var cStr = configuration.GetConnectionString("DefaultConnection");
-    services.AddDbContext<MyContext>((sp,options) =>
+    services.AddDbContext<MyContext>((sp, options) =>
     {
       options.UseSqlServer(cStr);
-      options.AddInterceptors(sp.GetRequiredService<MyInterceptor>()); 
+      options.AddInterceptors(sp.GetRequiredService<MyInterceptor>());
     });
 
 
@@ -26,12 +26,13 @@ public static class DataExtensions
     using var scope = host.Services.CreateScope();
     var services = scope.ServiceProvider;
     var db = services.GetRequiredService<MyContext>();
+
     if (db.Database.GetPendingMigrations().Any())
       db.Database.Migrate();
 
-    var person = new DbTest.Person { Name = "Nisse", Street = "Ågatan 1", City = "Gävle" };
+    var person = new Person { Name = "Nisse", Street = "Ågatan 1", City = "Gävle" };
     db.People.Add(person);
-    var order = new DbTest.Order { Person = person, Amount = 123.45M };
+    var order = new Order { Person = person, Amount = 123.45M };
     db.Orders.Add(order);
     await db.SaveChangesAsync();
 
@@ -41,6 +42,8 @@ public static class DataExtensions
 
     var people = await db.People.Include("Orders").AsNoTracking().ToListAsync();
     foreach (var p in people)
-      Console.WriteLine($"{p.Id}: {p.Name}, {p.Street}, {p.City}: {p.Orders.Count} orders"); return host;
+      Console.WriteLine($"{p.Id}: {p.Name}, {p.Street}, {p.City}: {p.Orders.Count} orders");
+
+    return host;
   }
 }

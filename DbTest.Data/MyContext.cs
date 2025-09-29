@@ -1,4 +1,4 @@
-﻿namespace DbTest;
+﻿namespace DbTest.Data;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +10,6 @@ internal class MyContext(DbContextOptions options)
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
-    modelBuilder.Entity<Person>().ToTable("People").Property("Name").HasMaxLength(50);
+    modelBuilder.ApplyConfigurationsFromAssembly(typeof(MyContext).Assembly);
   }
 }

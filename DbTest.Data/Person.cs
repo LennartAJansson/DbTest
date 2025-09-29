@@ -1,16 +1,13 @@
-﻿namespace DbTest;
+﻿namespace DbTest.Data;
 
-internal class Person: EntityBase
+internal class Person
+  : EntityBase
 {
-  public int Id { get; set; }
+  public int Id { get; set; } //Primary key property
   public string Name { get; set; }
   public string Street { get; set; }
   public string City { get; set; }
 
+  // Navigation property
   public ICollection<Order> Orders { get; set; } = new HashSet<Order>();
-}
-
-internal class EntityBase
-{
-  public DateTimeOffset Created { get; set; }
 }
